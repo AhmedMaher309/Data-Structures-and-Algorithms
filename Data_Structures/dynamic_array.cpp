@@ -5,7 +5,7 @@ class DynamicArray{
     private:
         int size;
         int * array;
-        int elementsNumber;
+        int elementsNumber;  // the actual capacity of the array filles by the user 
 
     public:
 
@@ -47,26 +47,24 @@ class DynamicArray{
         }
 
         int at(int index){
-            if (index >= 0 && index < size) {
+            if (index >= 0 && index < elementsNumber) {
             return array[index];
             }
-            // Handle out of bounds index here
-            // throw an exception or return a default value
-            // For example:
-            throw out_of_range("Index out of bounds");
+            throw out_of_range("Index out of range");
         }
         
         void push(int element){
-            // there is no elements yet in the array
+            // there are no elements yet in the array
             if(size == 1 && elementsNumber == 0){
                 array[0] = element;
                 elementsNumber++;
             }
+            // there are elements in the array and the array can be expanded without reallocation
             else if(size >1 && elementsNumber < size){
                 array[elementsNumber] = element;
                 elementsNumber++;
             }
-            // there is elements in the array but there is no space for additional elements
+            // there are elements in the array but there is no space for additional elements
             else if(size >= 1 && elementsNumber == size){
                 int * newArray = new int[this->size*2];
                 for(int i = 0; i < size; i++){
@@ -78,6 +76,51 @@ class DynamicArray{
                 elementsNumber++;
             }
         }
+        
+        void insert(int index, int item){
+            // the index is out of range
+            if(index > this->elementsNumber){
+                throw out_of_range("Index out of range");
+            }
+            // the array can be extended without new allocation for the new size
+            else if(this->elementsNumber < this->size){
+                for(int i = this->elementsNumber; i>= index; i--){
+                    this->array[i+1] = this->array[i];
+                }
+                array[index] = item;
+                elementsNumber++;
+            }
+            // the array cannot be extended without reallocation for the new size
+            else if(this->elementsNumber == this->size){
+                int * newArray = new int[this->size*2];
+                for(int i = 0; i < index; i++){
+                    newArray[i] = this->array[i];
+                }
+                newArray[index] = item;
+                for(int i = index+1; i < this->size+1; i++){
+                    newArray[i] = this->array[i-1];
+                }
+                this->array = newArray;
+                this->size = this->size*2;
+                elementsNumber++;
+            }
+        }
+
+        // insert at the beginning of the array
+        void prepend(int intem){
+            this->insert(0, intem);
+        }
+
+        // just move the elementsNumber one step backwards and the size will be decreases by one
+        void pop(){
+            this->elementsNumber--;
+        }
+
+        //utility for debugging
+        int getActualSize(){
+            return this->size;
+        }
+
 
 };
 
@@ -88,26 +131,44 @@ class DynamicArray{
 
 int main(){
     DynamicArray d;
-    cout<<d.isEmpty()<<endl;
-    //cout<<d.getSize()<<endl;
     d.push(5);
-    cout<<d.isEmpty()<<endl;
+    d.insert(1,20);
+    d.insert(1,22);
+    cout<<"size "<<d.getSize()<<endl;
+    cout<<"actual size "<<d.getActualSize()<<endl;
+    for(int i=0;i<d.getSize();i++){
+        cout<<d.at(i)<<endl;
+    }
+    cout<<endl;
+    d.prepend(15);
+    cout<<"size "<<d.getSize()<<endl;
+    cout<<"actual size "<<d.getActualSize()<<endl;
+    for(int i=0;i<d.getSize();i++){
+        cout<<d.at(i)<<endl;
+    }
+
     //cout<<d.getSize()<<endl;
-    d.push(10);
-    //cout<<d.getSize()<<endl;
+    // d.push(10);
+    // cout<<d.getSize()<<endl;
+    // cout<<d.at(0)<<endl<<d.at(1)<<endl;
     // for(int i=0;i<d.getSize();i++){
     //     cout<<d.at(i)<<endl;
     // }
-    int x = 15;
-    for (int i = 0; i < 10; i++)
-    {
-        d.push(x);
-        x++;
-    }
-    cout<<d.getSize()<<endl<<endl;
-    for (int i = 0; i < d.getSize(); i++)
-    {
-        cout<<d.at(i)<<endl<<endl;
-    }
+
+    // int x = 15;
+    // for (int i = 0; i < 10; i++)
+    // {
+    //     d.push(x);
+    //     x++;
+    // }
+    // cout<<d.getSize()<<endl<<endl;
+    // for (int i = 0; i < d.getSize(); i++)
+    // {
+    //     cout<<d.at(i)<<endl<<endl;
+    // }
+    // cout<<d.getSize()<<endl<<endl;
+    // d.pop();
+    // cout<<d.getSize()<<endl<<endl;
+   
     
 }
