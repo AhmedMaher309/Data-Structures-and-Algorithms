@@ -1,11 +1,36 @@
 #include <iostream>
 using namespace std;
 
+
 class DynamicArray{
     private:
         int size;
         int * array;
         int elementsNumber;  // the actual capacity of the array filles by the user 
+
+        void resize(){
+            // when you reach capacity, resize to double the size
+            // when popping an item, if size is 1/4 of capacity, resize to half
+
+            if(this->size == this->elementsNumber){
+                int newSize = this->size*2;
+                int * newArray = new int[newSize];
+                fill_n(newArray, newSize, 0);
+                for(int i = 0; i < this->size; i++){
+                    newArray[i] = this->array[i];
+                }
+                this->array = newArray;
+            }
+            else if(this->elementsNumber == this->size/4){
+                int newSize = this->size/2;
+                int * newArray = new int[newSize];
+                fill_n(newArray, newSize, 0);
+                for(int i = 0; i < newSize; i++){
+                    newArray[i] = this->array[i];
+                }
+                this->array = newArray;
+            }
+        }
 
     public:
 
@@ -142,17 +167,31 @@ class DynamicArray{
             this->elementsNumber--;
         }
 
-        // remove all elements from the array that are equal to the item
+        // remove all elements from the array that are equal to the item 
         void remove(int item){
-            for(int i = 0; i < this->elementsNumber; i++){
-                if(this->array[i] == item){
-                    // shift left all the elements from this index till the end
+            int * newArray = new int[this->size];
+            fill_n(newArray, this->size, 0);
+            int i = 0;
+            int j = 0;
+            while(i < this->elementsNumber){
+                if(array[i] != item){
+                    newArray[i] = item;
+                    j++;
                 }
+                i++;
             }
+            this->array = newArray;
         }
 
-
-
+        // search for a specific element and return the first index containing it, if not found return -1
+        int find(int item){
+            for(int i = 0; i < this->elementsNumber; i++){
+                if(array[i] == item){
+                    return i;
+                }
+            }
+            return -1;
+        }
 
         //utility for debugging
         int getActualSize(){
@@ -161,73 +200,3 @@ class DynamicArray{
 
 
 };
-
-// size = 1, elements = 0
-// size = 1, elements = 1
-// size = 2, elements = 2
-// size = 4, elements = 3
-
-int main(){
-    DynamicArray d;
-    d.push(5);
-    d.insert(1,20);
-    d.insert(1,22);
-    cout<<"size "<<d.getSize()<<endl;
-    cout<<"actual size "<<d.getActualSize()<<endl;
-    for(int i=0;i<d.getSize();i++){
-        cout<<d.at(i)<<endl;
-    }
-    cout<<endl;
-    d.prepend(15);
-    cout<<"size "<<d.getSize()<<endl;
-    cout<<"actual size "<<d.getActualSize()<<endl;
-    for(int i=0;i<d.getSize();i++){
-        cout<<d.at(i)<<endl;
-    }
-    cout<<endl<<endl;
-    d.deleteAt(0);
-    cout<<"size "<<d.getSize()<<endl;
-    cout<<"actual size "<<d.getActualSize()<<endl;
-    for(int i=0;i<d.getSize();i++){
-        cout<<d.at(i)<<endl;
-    }
-    cout<<endl<<endl;
-    d.deleteAt(3);
-    cout<<"size "<<d.getSize()<<endl;
-    cout<<"actual size "<<d.getActualSize()<<endl;
-    for(int i=0;i<d.getSize();i++){
-        cout<<d.at(i)<<endl;
-    }
-
-    // d.pop();
-    // cout<<"size "<<d.getSize()<<endl;
-    // cout<<"actual size "<<d.getActualSize()<<endl;
-    // d.pop();
-    // cout<<"size "<<d.getSize()<<endl;
-    // cout<<"actual size "<<d.getActualSize()<<endl;
-    // d.pop();
-    //cout<<d.getSize()<<endl;
-    // d.push(10);
-    // cout<<d.getSize()<<endl;
-    // cout<<d.at(0)<<endl<<d.at(1)<<endl;
-    // for(int i=0;i<d.getSize();i++){
-    //     cout<<d.at(i)<<endl;
-    // }
-
-    // int x = 15;
-    // for (int i = 0; i < 10; i++)
-    // {
-    //     d.push(x);
-    //     x++;
-    // }
-    // cout<<d.getSize()<<endl<<endl;
-    // for (int i = 0; i < d.getSize(); i++)
-    // {
-    //     cout<<d.at(i)<<endl<<endl;
-    // }
-    // cout<<d.getSize()<<endl<<endl;
-    // d.pop();
-    // cout<<d.getSize()<<endl<<endl;
-   
-    
-}
