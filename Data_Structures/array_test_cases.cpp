@@ -4,7 +4,11 @@
 int main(){
 
     DynamicArray d;
+    cout<<"size "<<d.getSize()<<endl;
+    cout<<"actual size "<<d.getActualSize()<<endl;
     d.push(5);
+    cout<<"size "<<d.getSize()<<endl;
+    cout<<"actual size "<<d.getActualSize()<<endl;
     d.insert(1,20);
     d.insert(1,22);
     cout<<"size "<<d.getSize()<<endl;

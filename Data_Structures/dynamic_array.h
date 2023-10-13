@@ -11,7 +11,6 @@ class DynamicArray{
         void resize(){
             // when you reach capacity, resize to double the size
             // when popping an item, if size is 1/4 of capacity, resize to half
-
             if(this->size == this->elementsNumber){
                 int newSize = this->size*2;
                 int * newArray = new int[newSize];
@@ -19,7 +18,9 @@ class DynamicArray{
                 for(int i = 0; i < this->size; i++){
                     newArray[i] = this->array[i];
                 }
+                delete[] this->array;
                 this->array = newArray;
+                this->size = newSize;
             }
             else if(this->elementsNumber == this->size/4){
                 int newSize = this->size/2;
@@ -28,7 +29,9 @@ class DynamicArray{
                 for(int i = 0; i < newSize; i++){
                     newArray[i] = this->array[i];
                 }
+                delete[] this->array;
                 this->array = newArray;
+                this->size = newSize;
             }
         }
 
@@ -94,14 +97,8 @@ class DynamicArray{
             }
             // there are elements in the array but there is no space for additional elements
             else if(size >= 1 && elementsNumber == size){
-                int * newArray = new int[this->size*2];
-                for(int i = 0; i < size; i++){
-                    newArray[i] = this->array[i];
-                }
-                //delete [] this->array;
-                newArray[this->size] = element;
-                this->array = newArray;
-                this->size = this->size*2;
+                this->resize();
+                this->array[elementsNumber] = element;
                 elementsNumber++;
             }
         }
@@ -130,11 +127,12 @@ class DynamicArray{
                 for(int i = index+1; i < this->size+1; i++){
                     newArray[i] = this->array[i-1];
                 }
-                //delete [] this->array;
+                delete [] this->array;
                 this->array = newArray;
                 this->size = this->size*2;
                 elementsNumber++;
             }
+            this->resize();
         }
 
         // insert at the beginning of the array
@@ -157,6 +155,7 @@ class DynamicArray{
                 }
                 elementsNumber--;
             }
+            this->resize();
         }
 
         // remove one element from the end of the array
@@ -165,6 +164,7 @@ class DynamicArray{
                 throw runtime_error("no elements in the array");
             }
             this->elementsNumber--;
+            this->resize();
         }
 
         // remove all elements from the array that are equal to the item 
@@ -181,6 +181,7 @@ class DynamicArray{
                 i++;
             }
             this->array = newArray;
+            this->resize();
         }
 
         // search for a specific element and return the first index containing it, if not found return -1
@@ -197,6 +198,4 @@ class DynamicArray{
         int getActualSize(){
             return this->size;
         }
-
-
 };
