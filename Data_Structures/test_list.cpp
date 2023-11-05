@@ -36,7 +36,19 @@ int main(){
 	list.printList();
 	list.insert(0,700);
 	list.printList();
-	cout<<list.value_n_from_end(5)<<endl;
+	list.reverse();
+	list.printList();
+	list.remove_value(700);
+	list.printList();
+	list.remove_value(60);
+	list.printList();
+	list.remove_value(19);
+	list.remove_value(40);
+	list.remove_value(90);
+	list.printList();
+	list.remove_value(200);
+	list.printList();
+//	cout<<list.value_n_from_end(5)<<endl;
 
 
 }

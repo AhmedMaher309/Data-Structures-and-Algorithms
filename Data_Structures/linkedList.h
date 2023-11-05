@@ -178,6 +178,54 @@ class LinkedList{
 			}
 			return ptr->data;
 		}
+		
+		void reverse(){
+			if (Head == nullptr || Head->next == nullptr)
+            			return;
+
+        		Node *prev = nullptr;
+       		 	Node *curr = Head;
+
+        		while (curr != nullptr)
+        		{
+            			Node *temp = curr->next;
+            			curr->next = prev;
+            			prev = curr;
+            			curr = temp;
+       		 	}
+			Head->next = nullptr;
+			Head = prev;
+
+		}
+
+		void remove_value(int value){
+			if(Head == nullptr)
+				return;
+			if(Head->data == value && !Head->next){
+				delete Head;
+				Head = nullptr;
+				return;
+			}
+			if(Head->data == value && Head->next){
+				Node* temp = Head;
+				Head = Head->next;
+				delete temp;
+				temp = nullptr;
+			}
+
+			Node* curr = Head;
+			while(curr->next){
+				if(curr->next->data == value){
+					Node * temp = curr->next;
+					curr->next = temp->next;
+					delete temp;
+					temp = nullptr;
+					
+				}
+				else
+					curr = curr->next;
+			}
+		}
 
 		void printList(){
 			if(!Head){
