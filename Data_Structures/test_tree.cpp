@@ -1,4 +1,4 @@
-#include "Tree.h"
+#include "BinaryTree.h"
 
 int main() {
     Tree tree;
