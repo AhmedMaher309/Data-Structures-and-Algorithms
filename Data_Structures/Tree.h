@@ -25,7 +25,7 @@ class Tree {
 		}
 
 
-		// creating a tree using level order approach
+		// creating a binary tree using level order approach
 		Node *createTree(int *arr, int n) {
 			if(n == 0) return nullptr;
 
@@ -51,6 +51,30 @@ class Tree {
 
 		}
 
+		void printPreOrder(Node *root){
+			if(root){
+				cout<<root->value<<" ";
+				printPreOrder(root->left);
+				printPreOrder(root->right);
+			}
+		}
+
+		void printInOrder(Node *root){
+			if(root){
+				printInOrder(root->left);
+				cout<<root->value<<" ";
+				printInOrder(root->right);
+			}
+		}
+
+		void printPostOrder(Node *root){
+			if(root){
+				printPostOrder(root->left);
+				printPostOrder(root->right);
+				cout<<root->value<<" ";
+			}
+		}
+
 		void printBinaryTree() {
 			if (!root) return;
 
@@ -67,18 +91,14 @@ class Tree {
 			}
 		}
 
-
-		void printBinaryTreeDrawed(Node* root, int space = 0, int count = 10) {
+		void printBinaryTreeDrawed(Node* root, int space = 0, int count = 7) {
 			if (!root) return;
-
 			space += count;
-
 			printBinaryTreeDrawed(root->right, space);
 			cout << endl;
 			for (int i = count; i < space; i++)
 				cout << " ";
 			cout << root->value << "\n";
-
 			printBinaryTreeDrawed(root->left, space);
 		}
 
