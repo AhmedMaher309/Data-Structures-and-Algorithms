@@ -14,6 +14,19 @@ class Node {
 class Tree {
 	private:
 		Node* root;
+
+		Node * insertInBST(Node * root, int value){
+			if(!root) return new Node(value);
+			
+			if(value < root->value) 
+				root->left = insertInBST(root->left, value);
+			else if(value > root->value) 
+				root->right = insertInBST(root->right, value);
+			return root;
+		}
+
+
+
 	public:
 
 		Tree(){
@@ -25,7 +38,7 @@ class Tree {
 		}
 
 
-		// creating a binary tree using level order approach
+		// creating a binary tree from a given array with size n using level order approach
 		Node *createTree(int *arr, int n) {
 			if(n == 0) return nullptr;
 
@@ -33,7 +46,7 @@ class Tree {
 			queue<Node*> q;
 			q.push(root);
 
-			for(int i = 0; i < n; i+=2){
+			for(int i = 1; i < n; i+=2){
 				Node* current = q.front();
 				q.pop();
 
@@ -50,6 +63,18 @@ class Tree {
 			return root;
 
 		}
+		
+		// create a binary search tree form a given array with size n
+		Node * createBST(int *arr, int n){
+			if(n == 0) return nullptr;
+
+			root = nullptr;
+			for(int i = 0; i < n; i++) root = this->insertInBST(root, arr[i]);
+			return root;
+		}
+
+
+
 
 		void printPreOrder(Node *root){
 			if(root){
@@ -101,6 +126,5 @@ class Tree {
 			cout << root->value << "\n";
 			printBinaryTreeDrawed(root->left, space);
 		}
-
 
 };

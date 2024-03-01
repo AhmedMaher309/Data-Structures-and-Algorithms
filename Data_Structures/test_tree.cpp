@@ -2,18 +2,24 @@
 
 int main() {
     Tree tree;
-    int arr[] = {1, 2, 3, 4, 5, 6, 7};
-    int n = 7;
+    int arr[] = {4, 6, 7, 5, 3, 2, 1, 10, 9, 8, 11};
+    int n = 11;
     Node* root = tree.createTree(arr, n);
-    tree.printBinaryTree();
-    cout << endl;
-    tree.printBinaryTreeDrawed(tree.getRoot());
+    cout<<"creating a binary tree:\n";
+    tree.printBinaryTreeDrawed(root);
+    cout<<"/////////////////////////////////////////////////////////////\n";
+    root = tree.createBST(arr, n);
+    cout<<"creating a binary search tree:\n";
+    tree.printBinaryTreeDrawed(root);
+    cout<<"////////////////////////////////////////////////////////////\n"; 
+    cout<<"pr-order traversal: ";
+    tree.printPreOrder(root);
     cout<<endl;
-    tree.printPreOrder(tree.getRoot());
+    cout<<"in-order traversal: ";
+    tree.printInOrder(root);
     cout<<endl;
-    tree.printInOrder(tree.getRoot());
-    cout<<endl;
-    tree.printPostOrder(tree.getRoot());
+    cout<<"post-order traversal: ";
+    tree.printPostOrder(root);
     cout<<endl;
 
 
