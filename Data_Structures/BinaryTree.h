@@ -73,8 +73,25 @@ class Tree {
 			return root;
 		}
 
+		// apply Breadth first search to find a node with specific value
+		Node * BFS(int value){
+			if(!root) return nullptr;
+			Node * result= new Node(-1);
+			queue<Node *> q;
+			q.push(root);
 
-
+			while(!q.empty()){
+				Node * current = q.front();
+				q.pop();
+				
+				if(current->value) return current;
+				
+				if(current->left)  q.push(current->left);
+				if(current->right) q.push(current->right);
+			}
+			cout<<result->value<<endl;
+			return result;
+		}
 
 		void printPreOrder(Node *root){
 			if(root){
