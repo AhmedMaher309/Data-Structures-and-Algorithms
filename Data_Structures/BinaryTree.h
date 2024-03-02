@@ -141,7 +141,7 @@ class Tree {
 			}
 		}
 
-		void printBinaryTree() {
+		void printBinaryTreeLevelOrder() {
 			if (!root) return;
 
 			queue<Node*> q;
