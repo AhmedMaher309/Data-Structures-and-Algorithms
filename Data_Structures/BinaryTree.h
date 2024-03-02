@@ -73,6 +73,7 @@ class Tree {
 			return root;
 		}
 
+
 		// apply Breadth first search to find a node with specific value
 		Node * BFS(int value){
 			if(!root) return nullptr;
@@ -84,14 +85,37 @@ class Tree {
 				Node * current = q.front();
 				q.pop();
 				
-				if(current->value) return current;
+				if(current->value == value) return current;
 				
 				if(current->left)  q.push(current->left);
 				if(current->right) q.push(current->right);
 			}
-			cout<<result->value<<endl;
 			return result;
 		}
+
+		// apply depth first search to find a node with specific value
+		Node * DFS(Node * root, int value){
+			if (!root) return new Node(-1);
+
+			if(root->value == value) return root;
+
+			Node * leftResult = nullptr;
+			Node * rightResult = nullptr;
+
+			if(root->left){
+				leftResult = DFS(root->left, value);
+				if(leftResult) return leftResult;
+			}
+			if(root->right){
+				rightResult = DFS(root->right, value);
+				if(rightResult) return rightResult;
+			}
+
+			return new Node(-1);
+		}
+
+			
+
 
 		void printPreOrder(Node *root){
 			if(root){

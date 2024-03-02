@@ -21,8 +21,10 @@ int main() {
     cout<<"post-order traversal: ";
     tree.printPostOrder(root);
     cout<<endl<<endl;
-    Node * N = tree.BFS();
+    Node * N = tree.BFS(1);
     cout<<N->value<<endl;
+    Node * M = tree.DFS(root, 0);
+    cout<<M->value<<endl;
     return 0;
 }
 
