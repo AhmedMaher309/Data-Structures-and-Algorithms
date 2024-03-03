@@ -1,1 +1,11 @@
-My implementation of data structures and some algorithms in C++
+This repository contains implementations of various core data structures in C++, built from scratch. The implemented data structures include:
+
+    Binary Trees
+    Hash Tables
+    Dynamic Arrays
+    Linked Lists
+    Queues
+
+Additionally, you'll find an implementation of the Bubble Sort algorithm.
+
+The source code for the data structures is located in the Data_Structures folder, while the Bubble Sort algorithm resides in the Algorithms folder.
