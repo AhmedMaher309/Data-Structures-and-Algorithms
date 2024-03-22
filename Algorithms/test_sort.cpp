@@ -1,16 +1,25 @@
 #include "Sorting.h"
 
 int main(){
-	int arr[] = {4, 6, 7, 5, 3, 2, 1, 10, 9, 8, 11, 1, 0};
-
-	int n = 13;
+	int bubbleArr[] = {4, 6, 7, 5, 3, 2, 1, 10, 9, 8, 11, 1, 0};
+	int n1 = 13;
+	
 	Sort S;
-	S.bubbleSort(arr, n);
-
-	for(int i = 0 ; i < n; i++){
-		cout<< arr[i]<<" ";
+	S.bubbleSort(bubbleArr, n1);
+	for(int i = 0 ; i < n1; i++){
+		cout<< bubbleArr[i]<<" ";
 	}
 	cout<<endl;
+
+
+        int quickArr[] = {4, 6, 7, 5, 3, 20, 1, 10, -9, 8, 11, 1, 0};
+	int n2 = 13;
+	S.quickSort(quickArr, 0, n2-1);
+	for(int i = 0 ; i < n2; i++){
+		cout<< quickArr[i]<<" ";
+	}
+	cout<<endl;
+
 
 	return 0;
 }
