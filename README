@@ -10,4 +10,4 @@ Additionally, you'll find an implementation of some algorithms include:
     Sorting --> Bubble, Quick
 
 
-The source code for the data structures is located in the Data_Structures folder, while the Bubble Sort algorithm resides in the Algorithms folder.
+The source code for the data structures is located in the Data_Structures folder, while the source code of the algorithms resides in the Algorithms folder.
