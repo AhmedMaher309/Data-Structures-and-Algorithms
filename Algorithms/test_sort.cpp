@@ -21,5 +21,15 @@ int main(){
 	cout<<endl;
 
 
+	int insertionArr[] = {4, 6, -7, 5, 3, 20, 1, 10, -9, 8, 11, 1, 0};
+	int n3 = 13;
+	S.insertionSort(insertionArr, n3);
+	for(int i = 0; i < n3; i++){
+		cout<<insertionArr[i]<<" ";
+	}
+	cout<<endl;
+
+
+
 	return 0;
 }
