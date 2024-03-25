@@ -7,7 +7,7 @@ This repository contains implementations of various core data structures in C++,
     Queues
 
 Additionally, you'll find an implementation of some algorithms include:
-    Sorting --> Bubble, Quick
+    Sorting --> bubble sort, quick sort, insertion sort
 
 
 The source code for the data structures is located in the Data_Structures folder, while the source code of the algorithms resides in the Algorithms folder.
