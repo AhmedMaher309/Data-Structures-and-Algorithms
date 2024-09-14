@@ -3,7 +3,7 @@
 int main(){
 	int bubbleArr[] = {4, 6, 7, 5, 3, 2, 1, 10, 9, 8, 11, 1, 0};
 	int n1 = 13;
-	
+
 	Sort S;
 	S.bubbleSort(bubbleArr, n1);
 	for(int i = 0 ; i < n1; i++){
@@ -12,7 +12,7 @@ int main(){
 	cout<<endl;
 
 
-        int quickArr[] = {4, 6, 7, 5, 3, 20, 1, 10, -9, 8, 11, 1, 0};
+	int quickArr[] = {4, 6, 7, 5, 3, 20, 1, 10, -9, 8, 11, 1, 0};
 	int n2 = 13;
 	S.quickSort(quickArr, 0, n2-1);
 	for(int i = 0 ; i < n2; i++){
@@ -29,6 +29,13 @@ int main(){
 	}
 	cout<<endl;
 
+	int mergeArr[] = {5, 7, 8, 0, -2, 3, 5, 6, -10, 10};
+	int n4 = 10;
+	S.mergeSort(mergeArr, n4);
+	for(int i = 0; i < n4; i++){
+		cout<<mergeArr[i]<<" ";
+	}
+	cout<<endl;
 
 
 	return 0;
